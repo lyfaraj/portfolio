@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Layal Al Faraj — Portfolio & Resume</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #f0f4f8;
+            --card: #ffffff;
+            --accent: #7b61ff; 
+            --dark: #2d3436;
+            --muted: #636e72;
+            --light-accent: #e0e7ff;
+            --radius: 16px;
+            --container: 1100px;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { margin: 0; background: var(--bg); color: var(--dark); -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+        .wrap { max-width: var(--container); margin: 30px auto; padding: 24px; }
+
+        /* NAV */
+        header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 40px; }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .logo {
+            width: 56px; height: 56px; border-radius: 14px; 
+            background: linear-gradient(135deg, var(--accent), #ff8a5a);
+            display: flex; align-items: center; justify-content: center; 
+            color: #fff; font-weight: 800; font-size: 22px;
+            box-shadow: 0 6px 18px rgba(123, 97, 255, 0.3);
+        }
+        nav ul { display: flex; gap: 20px; list-style: none; padding: 0; margin: 0; }
+        nav a { color: var(--muted); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+        .cta { 
+            background: var(--accent); color: #fff; padding: 12px 22px; 
+            border-radius: 12px; text-decoration: none; font-weight: 700; 
+            box-shadow: 0 4px 15px rgba(123, 97, 255, 0.2); transition: 0.3s; 
+        }
+        .cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(123, 97, 255, 0.4); }
+
+        /* Hero */
+        .hero { 
+            display: grid; grid-template-columns: 1fr 380px; gap: 40px; 
+            align-items: center; background: #fff; padding: 40px; 
+            border-radius: 24px; box-shadow: var(--shadow); 
+        }
+        .hero-left h1 { font-size: 42px; margin: 10px 0; line-height: 1.2; }
+        .hero-left p.lead { color: var(--muted); font-size: 18px; margin-bottom: 25px; line-height: 1.6; }
+        .btn-outline { 
+            padding: 12px 22px; border-radius: 12px; border: 2px solid var(--accent); 
+            color: var(--accent); text-decoration: none; font-weight: 700; transition: 0.3s; 
+        }
+        .btn-outline:hover { background: var(--accent); color: #fff; }
+        .portrait { 
+            width: 300px; height: 300px; border-radius: 50%; overflow: hidden; 
+            border: 10px solid var(--light-accent); box-shadow: var(--shadow); 
+        }
+        .portrait img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Enhanced Skills Section */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
+        .skill-item {
+            background: #fff; padding: 20px; border-radius: var(--radius-md); text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: 0.3s; border: 1px solid transparent;
+        }
+        .skill-item:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: var(--shadow); }
+        .skill-item i { font-size: 32px; color: var(--primary); margin-bottom: 10px; }
+        .skill-item span { display: block; font-weight: 700; font-size: 14px; }
+
+        /* Modernized Swiper Slider */
+        .swiper { width: 100%; padding: 50px 0; }
+        .swiper-slide { width: 350px; opacity: 0.4; transition: 0.4s; transform: scale(0.85); }
+        .swiper-slide-active { opacity: 1; transform: scale(1); }
+        
+        .project-card {
+            background: #fff; border-radius: var(--radius-lg); overflow: hidden;
+            box-shadow: var(--shadow); position: relative;
+        }
+        .project-img { height: 220px; position: relative; overflow: hidden; }
+        .project-img img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* Overlay on Hover */
+        .project-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(99, 102, 241, 0.9); display: flex; align-items: center;
+            justify-content: center; gap: 15px; opacity: 0; transition: 0.3s;
+        }
+        .project-card:hover .project-overlay { opacity: 1; }
+        .btn-visit { 
+            background: #fff; color: var(--primary); padding: 10px 20px; 
+            border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 13px;
+            transition: 0.3s;
+        }
+        .btn-visit:hover { transform: scale(1.1); }
+
+        .project-content { padding: 20px; }
+        .project-content h4 { margin: 0 0 10px; font-size: 20px; }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { background: #f1f5f9; color: var(--muted); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+
+
+        /* Timeline */
+        .timeline { background: #fff; padding: 25px; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 20px; }
+        .timeline-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f1f1f1; }
+        .timeline-item:last-child { border-bottom: 0; }
+
+        /* Footer */
+        footer { 
+            margin-top: 40px; padding: 40px; border-radius: 24px; 
+            background: var(--dark); color: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; 
+        }
+        .contact-form input, .contact-form textarea { 
+            padding: 14px; border-radius: 10px; border: 1px solid #444; 
+            background: #3d444b; color: #fff; width: 100%; margin-bottom: 12px;
+        }
+        .contact-form button { background: var(--accent); border: 0; padding: 14px; color: #fff; font-weight: 700; border-radius: 10px; cursor: pointer; }
+
+/* --- Ultra-Clean Responsive Hero & Layout --- */
+
+@media (max-width: 768px) {
+    /* 1. Hero Section Refinement */
+    .hero {
+        display: flex !important;
+        flex-direction: column !important; /* Stack vertically */
+        padding: 40px 20px !important;
+        text-align: center !important;
+        gap: 20px !important;
+    }
+
+    .hero-right {
+        order: 1; /* Image on top */
+        margin-bottom: 10px;
+    }
+
+    .hero-left {
+        order: 2; /* Text below image */
+    }
+
+    .portrait {
+        width: 150px !important; /* Smaller, sharper profile size */
+        height: 150px !important;
+        margin: 0 auto;
+        border: 5px solid var(--light-accent);
+    }
+
+    .hero-left h1 {
+        font-size: 28px !important; /* Balanced heading size */
+        line-height: 1.2;
+    }
+
+    .hero-left p.lead {
+        font-size: 15px !important;
+        margin-bottom: 25px !important;
+    }
+
+    /* 2. Button Layout for Mobile */
+    .hero-left div[style*="display: flex"] {
+        flex-direction: column !important; /* Stack buttons */
+        width: 100%;
+        gap: 12px !important;
+    }
+
+    .cta, .btn-outline {
+        width: 100%;
+        display: block;
+        text-align: center;
+        padding: 14px !important;
+        box-sizing: border-box;
+    }
+
+    /* 3. Header & Navigation */
+    header {
+        flex-direction: column !important;
+        text-align: center;
+        gap: 15px;
+    }
+
+    nav ul {
+        justify-content: center;
+        gap: 15px;
+    }
+
+    /* 4. Skills Grid Fix */
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px;
+    }
+
+    /* 5. Experience & Education Stacking */
+    div[style*="display: grid; grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* 6. Footer Polish */
+    footer {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+    }
+}
+
+/* Optimization for very small screens */
+@media (max-width: 400px) {
+    .hero-left h1 {
+        font-size: 24px !important;
+    }
+    
+    nav a {
+        font-size: 12px;
+    }
+}
+    </style>
+</head>
+<body>
+
+<div class="wrap">
+    <header data-aos="fade-down">
+        <div class="brand">
+            <div class="logo">LF</div>
+            <div>
+                <div style="font-weight:800; font-size: 18px;">Layal Al Faraj</div>
+                <div style="color:var(--muted);font-size:12px; text-transform: uppercase; letter-spacing: 1px;">Software Developer</div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="#contact">Hire Me</a>
+    </header>
+
+    <section class="hero" id="about">
+        <div class="hero-left" data-aos="fade-right">
+            <span style="background:var(--light-accent); color:var(--accent); padding:6px 15px; border-radius:20px; font-weight:700; font-size: 14px;">Software Developer</span>
+            <h1>I build <span style="color:var(--accent)">Mobile</span> & <br>Web Solutions</h1>
+            <p class="lead">Computer science graduate with a passion for AI and development. I turn complex problems into simple, beautiful, and intuitive designs.</p>
+            <div style="display: flex; gap: 15px;">
+                <a class="cta" href="#projects">View Projects</a>
+                <a class="btn-outline" href="#contact">Get In Touch</a>
+            </div>
+        </div>
+        <div class="hero-right" data-aos="zoom-in">
+            <div class="portrait">
+                <img src="img/profile.jpg" alt="Layal">
+            </div>
+        </div>
+    </section>
+
+
+    <section id="skills" style="margin-top: 50px;">
+        <h3 style="font-size: 24px;"><i class="fas fa-terminal"></i> Tech Stack</h3>
+        <div class="skills-grid">
+            <div class="skill-item" data-aos="fade-up" data-aos-delay="100">
+                <i class="fab fa-java"></i><span>Java</span>
+            </div>
+            <div class="skill-item" data-aos="fade-up" data-aos-delay="200">
+                <i class="fab fa-js"></i><span>JavaScript</span>
+            </div>
+            <div class="skill-item" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-mobile-alt"></i><span>Flutter</span>
+            </div>
+            <div class="skill-item" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-database"></i><span>SQL Server</span>
+            </div>
+            <div class="skill-item" data-aos="fade-up" data-aos-delay="500">
+                <i class="fab fa-php"></i><span>PHP</span>
+            </div>
+            <div class="skill-item" data-aos="fade-up" data-aos-delay="600">
+                <i class="fas fa-search"></i><span>SEO</span>
+            </div>
+            <div class="skill-item" data-aos="fade-up" data-aos-delay="700">
+                <i class="fab fa-html5"></i><span>HTML</span>
+            </div>
+            <div class="skill-item" data-aos="fade-up" data-aos-delay="800">
+                <i class="fab fa-css3-alt"></i><span>CSS</span>
+            </div>
+            <div class="skill-item" data-aos="fade-up" data-aos-delay="900">
+                <i class="fas fa-code"></i><span>C#</span>
+            </div>
+            <div class="skill-item" data-aos="fade-up" data-aos-delay="1000">
+                <i class="fas fa-pencil-ruler"></i><span>UI/UX</span>
+            </div>
+            <div class="skill-item" data-aos="fade-up" data-aos-delay="1100">
+                <i class="fas fa-code"></i><span>C++</span>
+            </div>
+            <div class="skill-item" data-aos="fade-up" data-aos-delay="1200">
+                <i class="fas fa-window-maximize"></i><span>.NET</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" style="margin-top: 80px;">
+        <h3 style="font-size: 24px; text-align: center;">Featured Projects</h3>
+        <p style="text-align: center; color: var(--muted);">Swipe to explore my latest builds</p>
+        
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="img/art2.png" alt="Art Gallery Project">
+                            <div class="project-overlay">
+                                <a href="https://github.com/lyfaraj/art-gallery-" target="_blank" class="btn-visit">GitHub</a>
+                                <a href="https://lyfaraj.github.io/art-gallery-/" target="_blank" class="btn-visit">Demo</a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h4>Art Gallery</h4>
+                            <div class="project-tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="img/cinewave2.png" alt="CineWave Project">
+                            <div class="project-overlay">
+                                <a href="https://github.com/lyfaraj/cineWave" target="_blank" class="btn-visit">GitHub</a>
+                                <a href="http://cinewave.42web.io/" target="_blank" class="btn-visit">Demo</a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h4>CineWave</h4>
+                            <div class="project-tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">AJAX</span>
+                                <span class="tag">PHP</span>
+                                <span class="tag">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="img/mindscript.png" alt="MindScript Project">
+                            <div class="project-overlay">
+                                <a href="https://github.com/lyfaraj/MindScript" target="_blank" class="btn-visit">GitHub</a>
+                                <a href="http://mindscript.42web.io/" target="_blank" class="btn-visit">Demo</a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h4>MindScript</h4>
+                            <div class="project-tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">AJAX</span>
+                                <span class="tag">PHP</span>
+                                <span class="tag">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="img/SM.png" alt="Degital Agency Project">
+                            <div class="project-overlay">
+                                <a href="https://github.com/lyfaraj/social-platform-full-stack" target="_blank" class="btn-visit">GitHub</a>
+                                <a href="http://degitalagency.42web.io/" target="_blank" class="btn-visit">Demo</a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h4>Degital Agency</h4>
+                            <div class="project-tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">AJAX</span>
+                                <span class="tag">PHP</span>
+                                <span class="tag">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px;">
+        <section class="timeline" id="experience" data-aos="fade-right">
+            <h3 class="section-title">Experience</h3>
+            <div class="timeline-item">
+                <div><strong>Instructor</strong><br><small>DTLC | 2021-2024</small></div>
+                <div class="small" style="color:var(--accent)">Java & Logic</div>
+            </div>
+            <div class="timeline-item">
+                <div><strong>SEO Training</strong><br><small>SEO Lebanon | 2024</small></div>
+                <div class="small" style="color:var(--accent)">Marketing</div>
+            </div>
+        </section>
+
+        <section class="timeline" id="education" data-aos="fade-left">
+            <h3 class="section-title">Education</h3>
+            <div class="timeline-item">
+                <div><strong>BS in Computer Science</strong><br><small>LIU | 2021-2024</small></div>
+            </div>
+            <div class="timeline-item">
+                <div><strong>Cisco Certifications</strong><br><small>CCNA & IT Essentials</small></div>
+            </div>
+        </section>
+    </div>
+
+    <footer id="contact" data-aos="fade-up">
+        <div>
+            <h2>Let's Talk</h2>
+            <p>I am interested in junior developer opportunities. If you have any questions, don't hesitate to contact me.</p>
+            <div style="margin-top: 20px;">
+                <p><i class="fas fa-envelope"></i> layalalfaraj8.9@gmail.com</p>
+                <p><i class="fas fa-location-dot"></i> Beirut, Lebanon</p>
+            </div>
+        </div>
+        <form class="contact-form" onsubmit="return submitContact(event)">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" rows="4" placeholder="Message..." required></textarea>
+            <button type="submit">Send Message</button>
+            <div id="contactResult" style="color:#7b61ff; font-weight:700; display:none; margin-top:10px;">Message Sent!</div>
+        </form>
+    </footer>
+</div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true });
+
+    // Swiper "Coverflow" Effect for smoother interaction
+    const swiper = new Swiper('.mySwiper', {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+            rotate: 10,
+            stretch: 0,
+            depth: 100,
+            modifier: 2,
+            slideShadows: false,
+        },
+        pagination: { el: ".swiper-pagination", clickable: true },
+        autoplay: { delay: 3000 }
+    });
+
+    function submitContact(e){
+        e.preventDefault();
+        document.getElementById('contactResult').style.display = 'block';
+        setTimeout(() => { document.getElementById('contactResult').style.display = 'none'; e.target.reset(); }, 2000);
+        return false;
+    }
+</script>
+</body>
+</html>
